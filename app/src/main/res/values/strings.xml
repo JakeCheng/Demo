@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Demo</string>
+    <string name="loading">Loading...</string>
+
+    <string name="no_network_connect">Can\'t connect to the network.\nWait a minute or two and try again.</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="no_content">no more content</string>
+    <string name="network_connect_error">Connection timed out.\nWait a minute or two and try again.</string>
+    <string name="server_in_error">A network error occurred.\nWait a minute or two and try again.</string>
+</resources>

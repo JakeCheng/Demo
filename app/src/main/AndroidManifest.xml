@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.demo">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Ui.DemoActivity" />
+        <!-- 网络变化判断 -->
+        <receiver
+            android:name=".Service.NetworkReceiver"
+            android:process=":Remote">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <!-- 优先级 -->
+            <intent-filter android:priority="100">
+
+                <!-- 通知的标识 -->
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".Ui.DBGreenDaoActivity" />
+
+        <service
+            android:name=".Service.BookService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":aidl" />
+
+        <activity android:name=".Ui.AIDLActivity" />
+        <activity android:name=".Ui.MyViewActivity" />
+        <activity android:name=".Ui.MyViewGroupActivity" />
+        <activity android:name=".Ui.MyView2Activity" />
+        <activity android:name=".Ui.MoveActivity" />
+
+        <service android:name=".Service.MyOneService" />
+
+        <activity android:name=".Ui.MyServiceActivity" />
+        <activity android:name=".Ui.MyRecyclerViewActivity"></activity>
+    </application>
+
+</manifest>
