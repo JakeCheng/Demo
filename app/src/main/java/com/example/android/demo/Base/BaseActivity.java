@@ -1,8 +1,6 @@
 package com.example.android.demo.Base;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.LayoutRes;
@@ -14,9 +12,13 @@ import com.example.android.demo.BuildConfig;
 import com.example.android.demo.Db.DbManager;
 import com.example.android.demo.GreenDao.DaoSession;
 import com.example.android.demo.MyApplication;
-import com.example.android.demo.R;
+import com.example.android.demo.Service.NetWorkChangeEvent;
 import com.example.android.demo.Utils.MyAppManager;
-import com.example.android.demo.Utils.ProgressDialog;
+import com.example.android.demo.Utils.NetWorkManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 
@@ -25,7 +27,6 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
     protected BaseActivity mContext;
     protected DaoSession mDaoSession;
     protected MyApplication application;
-    protected Dialog dialog;
     protected String TAG;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +49,9 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         }
         super.onCreate( savedInstanceState);
         mContext = this;
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
         mDaoSession = DbManager.getDaoSession(mContext);
         setContentView(getRootViewId());
         ButterKnife.bind(this);
@@ -84,23 +88,6 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         return getPrevIntent().getExtras();
     }
 
-    /**
-     * 展示加载中
-     */
-    protected void showLoading(){
-        dialog = ProgressDialog.createLoadingDialog(mContext,getResources().getString(R.string.loading));
-        dialog.show();
-    }
-
-    /**
-     * 去下加载中
-     */
-    protected void dissmissLoading(){
-        if (dialog != null && dialog.isShowing()){
-            dialog.dismiss();
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -115,6 +102,23 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
         MyAppManager.getInstance().deleteLastActivity();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(NetWorkChangeEvent event) {
+        switch (NetWorkManager.getNetworkState()) {
+            case NetWorkChangeEvent.NET_NO:
+                Log.e(TAG, "onEventMainThread: 没有网络");
+                break;
+            case NetWorkChangeEvent.NET_DATA:
+                Log.e(TAG, "onEventMainThread: 移动网络");
+                break;
+            case NetWorkChangeEvent.NET_WIFI:
+                Log.e(TAG, "onEventMainThread: WiFI");
+                break;
+        }
     }
 }

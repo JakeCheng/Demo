@@ -20,7 +20,7 @@ public class Teacher {
     private Long id;
     @Property(nameInDb = "teacher_id")
     @Index(unique = true)
-    private String teacher_id;
+    private Long teacher_id;
     @Property(nameInDb = "teacher_name")
     @NotNull
     private String teacher_name;
@@ -34,8 +34,9 @@ public class Teacher {
     /** Used for active entity operations. */
     @Generated(hash = 648119699)
     private transient TeacherDao myDao;
-    @Generated(hash = 981472976)
-    public Teacher(Long id, String teacher_id, @NotNull String teacher_name, String teacher_price) {
+    @Generated(hash = 1391299869)
+    public Teacher(Long id, Long teacher_id, @NotNull String teacher_name,
+            String teacher_price) {
         this.id = id;
         this.teacher_id = teacher_id;
         this.teacher_name = teacher_name;
@@ -50,10 +51,10 @@ public class Teacher {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getTeacher_id() {
+    public Long getTeacher_id() {
         return this.teacher_id;
     }
-    public void setTeacher_id(String teacher_id) {
+    public void setTeacher_id(Long teacher_id) {
         this.teacher_id = teacher_id;
     }
     public String getTeacher_name() {
@@ -61,6 +62,12 @@ public class Teacher {
     }
     public void setTeacher_name(String teacher_name) {
         this.teacher_name = teacher_name;
+    }
+    public String getTeacher_price() {
+        return this.teacher_price;
+    }
+    public void setTeacher_price(String teacher_price) {
+        this.teacher_price = teacher_price;
     }
     /**
      * To-many relationship, resolved on first access (and after reset).
@@ -127,11 +134,6 @@ public class Teacher {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getTeacherDao() : null;
     }
-    public String getTeacher_price() {
-        return this.teacher_price;
-    }
-    public void setTeacher_price(String teacher_price) {
-        this.teacher_price = teacher_price;
-    }
+
 
 }

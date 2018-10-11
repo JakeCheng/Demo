@@ -25,7 +25,7 @@ public class TeacherDao extends AbstractDao<Teacher, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Teacher_id = new Property(1, String.class, "teacher_id", false, "teacher_id");
+        public final static Property Teacher_id = new Property(1, Long.class, "teacher_id", false, "teacher_id");
         public final static Property Teacher_name = new Property(2, String.class, "teacher_name", false, "teacher_name");
         public final static Property Teacher_price = new Property(3, String.class, "teacher_price", false, "teacher_price");
     }
@@ -47,7 +47,7 @@ public class TeacherDao extends AbstractDao<Teacher, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TEACHER\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"teacher_id\" TEXT," + // 1: teacher_id
+                "\"teacher_id\" INTEGER," + // 1: teacher_id
                 "\"teacher_name\" TEXT NOT NULL ," + // 2: teacher_name
                 "\"teacher_price\" TEXT);"); // 3: teacher_price
         // Add Indexes
@@ -70,9 +70,9 @@ public class TeacherDao extends AbstractDao<Teacher, Long> {
             stmt.bindLong(1, id);
         }
  
-        String teacher_id = entity.getTeacher_id();
+        Long teacher_id = entity.getTeacher_id();
         if (teacher_id != null) {
-            stmt.bindString(2, teacher_id);
+            stmt.bindLong(2, teacher_id);
         }
         stmt.bindString(3, entity.getTeacher_name());
  
@@ -91,9 +91,9 @@ public class TeacherDao extends AbstractDao<Teacher, Long> {
             stmt.bindLong(1, id);
         }
  
-        String teacher_id = entity.getTeacher_id();
+        Long teacher_id = entity.getTeacher_id();
         if (teacher_id != null) {
-            stmt.bindString(2, teacher_id);
+            stmt.bindLong(2, teacher_id);
         }
         stmt.bindString(3, entity.getTeacher_name());
  
@@ -118,7 +118,7 @@ public class TeacherDao extends AbstractDao<Teacher, Long> {
     public Teacher readEntity(Cursor cursor, int offset) {
         Teacher entity = new Teacher( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // teacher_id
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // teacher_id
             cursor.getString(offset + 2), // teacher_name
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // teacher_price
         );
@@ -128,7 +128,7 @@ public class TeacherDao extends AbstractDao<Teacher, Long> {
     @Override
     public void readEntity(Cursor cursor, Teacher entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setTeacher_id(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setTeacher_id(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setTeacher_name(cursor.getString(offset + 2));
         entity.setTeacher_price(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }

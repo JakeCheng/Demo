@@ -23,18 +23,6 @@
         android:text="自定义View"
         android:textAllCaps="false"/>
     <Button
-        android:id="@+id/btn_view2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="自定义View2"
-        android:textAllCaps="false"/>
-    <Button
-        android:id="@+id/btn_viewgroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="自定义VIEWGroup"
-        android:textAllCaps="false"/>
-    <Button
         android:id="@+id/btn_permission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,12 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="跟手滑动"/>
-    <Button
-        android:id="@+id/btn_service"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Service服务"
-        android:textAllCaps="false"/>
     <Button
         android:id="@+id/btn_recyclerview"
         android:layout_width="match_parent"

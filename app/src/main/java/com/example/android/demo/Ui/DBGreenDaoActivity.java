@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBGreenDaoActivity extends BaseActivity {
-
+    int i = 1;
+    long tearcherId = 10000;
     @Override
     public int getRootViewId() {
         return R.layout.activity_dbgreen_dao;
@@ -26,7 +27,7 @@ public class DBGreenDaoActivity extends BaseActivity {
         findViewById(R.id.addStudent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDaoSession.getStudentDao().insert(new Student(null,"001","张三", (long) 1,"3",""));
+                mDaoSession.getStudentDao().insert(new Student(null,i++,"张三"+i, (long) 1,"3",""));
             }
         });
 
@@ -34,26 +35,22 @@ public class DBGreenDaoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 List<Teacher> list = new ArrayList<>();
-                list.add(new Teacher(null,"0000001","张老师",""));
-                list.add(new Teacher(null,"0000002","李老师",""));
-                list.add(new Teacher(null,"0000003","王老师",""));
-                list.add(new Teacher(null,"0000004","苏老师",""));
-                list.add(new Teacher(null,"0000005","孙老师",""));
+                list.add(new Teacher(null,tearcherId++,"张老师",""));
+                list.add(new Teacher(null,tearcherId++,"李老师",""));
+                list.add(new Teacher(null,tearcherId++,"王老师",""));
+                list.add(new Teacher(null,tearcherId++,"苏老师",""));
+                list.add(new Teacher(null,tearcherId++,"孙老师",""));
                 mDaoSession.getTeacherDao().insertInTx(list);
             }
         });
         findViewById(R.id.query).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Teacher teacher = mDaoSession.getTeacherDao().queryBuilder().where(TeacherDao.Properties.Teacher_name.eq("张老师")).build().unique();
+                Teacher teacher = mDaoSession.getTeacherDao().queryBuilder().where(TeacherDao.Properties.Teacher_id.eq(10001)).build().unique();
                 Log.e("info", "onClick: 打印该老师的所有学生："+new Gson().toJson(teacher.getStudents()));
             }
         });
-        findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+
     }
 
     @Override

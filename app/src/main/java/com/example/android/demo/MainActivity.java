@@ -16,10 +16,7 @@ import com.example.android.demo.Ui.AIDLActivity;
 import com.example.android.demo.Ui.DBGreenDaoActivity;
 import com.example.android.demo.Ui.MoveActivity;
 import com.example.android.demo.Ui.MyRecyclerViewActivity;
-import com.example.android.demo.Ui.MyServiceActivity;
-import com.example.android.demo.Ui.MyView2Activity;
 import com.example.android.demo.Ui.MyViewActivity;
-import com.example.android.demo.Ui.MyViewGroupActivity;
 import com.example.android.demo.Utils.ScreenUtils;
 
 import java.util.List;
@@ -57,7 +54,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         Log.e(TAG, "initView: "+ Process.myUid());
 
 
-
         findViewById(R.id.btn_greenDao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,18 +73,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
                 startActivity(new Intent(mContext,MyViewActivity.class));
             }
         });
-        findViewById(R.id.btn_view2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext,MyView2Activity.class));
-            }
-        });
-        findViewById(R.id.btn_viewgroup).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext,MyViewGroupActivity.class));
-            }
-        });
         findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,12 +83,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext,MoveActivity.class));
-            }
-        });
-        findViewById(R.id.btn_service).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext,MyServiceActivity.class));
             }
         });
         findViewById(R.id.btn_recyclerview).setOnClickListener(new View.OnClickListener() {
@@ -155,13 +133,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
     @AfterPermissionGranted(RC_CAMERA_AND_WIFI)
     public void getPermission() {
-            if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // Have permission, do the thing!
-               startActivity(new Intent(mContext,MyView2Activity.class));
-            } else {
-                // Ask for one permission
-                ActivityCompat.requestPermissions(mContext, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, RC_CAMERA_AND_WIFI);
-            }
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            // Have permission, do the thing!
+            startActivity(new Intent(mContext,MyViewActivity.class));
+        } else {
+            // Ask for one permission
+            ActivityCompat.requestPermissions(mContext, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, RC_CAMERA_AND_WIFI);
+        }
     }
 
     @Override

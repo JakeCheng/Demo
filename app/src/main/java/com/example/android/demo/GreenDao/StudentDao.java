@@ -28,7 +28,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property StuNo = new Property(1, String.class, "stuNo", false, "stu_no");
+        public final static Property StuNo = new Property(1, int.class, "stuNo", false, "stu_no");
         public final static Property StuName = new Property(2, String.class, "stuName", false, "stu_name");
         public final static Property TeacherId = new Property(3, Long.class, "teacherId", false, "teacher_id");
         public final static Property StuAge = new Property(4, String.class, "stuAge", false, "stu_age");
@@ -50,7 +50,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"STUDENT\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"stu_no\" TEXT," + // 1: stuNo
+                "\"stu_no\" INTEGER NOT NULL ," + // 1: stuNo
                 "\"stu_name\" TEXT NOT NULL ," + // 2: stuName
                 "\"teacher_id\" INTEGER," + // 3: teacherId
                 "\"stu_age\" TEXT," + // 4: stuAge
@@ -74,11 +74,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        String stuNo = entity.getStuNo();
-        if (stuNo != null) {
-            stmt.bindString(2, stuNo);
-        }
+        stmt.bindLong(2, entity.getStuNo());
         stmt.bindString(3, entity.getStuName());
  
         Long teacherId = entity.getTeacherId();
@@ -105,11 +101,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        String stuNo = entity.getStuNo();
-        if (stuNo != null) {
-            stmt.bindString(2, stuNo);
-        }
+        stmt.bindLong(2, entity.getStuNo());
         stmt.bindString(3, entity.getStuName());
  
         Long teacherId = entity.getTeacherId();
@@ -137,7 +129,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
     public Student readEntity(Cursor cursor, int offset) {
         Student entity = new Student( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // stuNo
+            cursor.getInt(offset + 1), // stuNo
             cursor.getString(offset + 2), // stuName
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // teacherId
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // stuAge
@@ -149,7 +141,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
     @Override
     public void readEntity(Cursor cursor, Student entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setStuNo(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setStuNo(cursor.getInt(offset + 1));
         entity.setStuName(cursor.getString(offset + 2));
         entity.setTeacherId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setStuAge(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));

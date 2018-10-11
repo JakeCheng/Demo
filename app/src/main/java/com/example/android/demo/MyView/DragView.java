@@ -6,7 +6,6 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
 /**
- * Created by android on 2018/10/9.
  * 自定义跟随滑动View
  */
 public class DragView extends android.support.v7.widget.AppCompatTextView {

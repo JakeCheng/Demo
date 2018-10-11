@@ -7,13 +7,17 @@ import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
+/**
+ * 只要更改数据就需要重新编译
+ * Build --> Make Module 'APP'编译
+ */
 @Entity
 public class Student {
     @Id(autoincrement = true)
     private Long id;
     @Index(unique = true)
     @Property(nameInDb = "stu_no")
-    private String stuNo;
+    private int stuNo;
     @Property(nameInDb = "stu_name")
     @NotNull
     private String stuName;
@@ -23,8 +27,8 @@ public class Student {
     private String stuAge;
     @Property(nameInDb = "stu_price")
     private String stuPrice;
-    @Generated(hash = 190000498)
-    public Student(Long id, String stuNo, @NotNull String stuName, Long teacherId,
+    @Generated(hash = 2100874659)
+    public Student(Long id, int stuNo, @NotNull String stuName, Long teacherId,
             String stuAge, String stuPrice) {
         this.id = id;
         this.stuNo = stuNo;
@@ -42,10 +46,10 @@ public class Student {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getStuNo() {
+    public int getStuNo() {
         return this.stuNo;
     }
-    public void setStuNo(String stuNo) {
+    public void setStuNo(int stuNo) {
         this.stuNo = stuNo;
     }
     public String getStuName() {
@@ -72,4 +76,5 @@ public class Student {
     public void setStuPrice(String stuPrice) {
         this.stuPrice = stuPrice;
     }
+
 }

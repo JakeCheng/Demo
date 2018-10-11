@@ -20,10 +20,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="查询老师"/>
-
-    <Button
-        android:id="@+id/add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="添加学生表字段"/>
 </LinearLayout>

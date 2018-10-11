@@ -15,15 +15,9 @@ import com.example.android.demo.Book;
 import com.example.android.demo.IBookManager;
 import com.example.android.demo.R;
 import com.example.android.demo.Service.BookService;
-import com.example.android.demo.Service.NetWorkChangeEvent;
-import com.example.android.demo.Utils.JSONHelper;
-import com.example.android.demo.Utils.Logger;
-import com.example.android.demo.Utils.NetWorkManager;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Random;
@@ -104,19 +98,5 @@ public class AIDLActivity extends BaseActivity {
         super.onDestroy();
         unbindService(connection);
         EventBus.getDefault().unregister(this);
-    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NetWorkChangeEvent event) {
-        switch (NetWorkManager.getNetworkState()) {
-            case NetWorkChangeEvent.NET_NO:
-                Log.e(TAG, "onEventMainThread: 没有网络");
-                break;
-            case NetWorkChangeEvent.NET_DATA:
-                Log.e(TAG, "onEventMainThread: 移动网络");
-                break;
-            case NetWorkChangeEvent.NET_WIFI:
-                Log.e(TAG, "onEventMainThread: WiFI");
-                break;
-        }
     }
 }

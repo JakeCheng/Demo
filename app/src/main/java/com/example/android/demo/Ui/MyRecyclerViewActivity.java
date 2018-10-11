@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.android.demo.Adapter.DemoAdapter;
 import com.example.android.demo.Adapter.DemoItemTypeAdapter;
 import com.example.android.demo.Base.BaseActivity;
 import com.example.android.demo.Bean.DemoItemBean;
