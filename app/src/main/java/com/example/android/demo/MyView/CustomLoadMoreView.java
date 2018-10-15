@@ -1,4 +1,4 @@
-package com.example.android.demo.View;
+package com.example.android.demo.MyView;
 
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.example.android.demo.R;

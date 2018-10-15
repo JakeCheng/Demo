@@ -7,4 +7,9 @@
     <string name="no_content">no more content</string>
     <string name="network_connect_error">Connection timed out.\nWait a minute or two and try again.</string>
     <string name="server_in_error">A network error occurred.\nWait a minute or two and try again.</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
 </resources>

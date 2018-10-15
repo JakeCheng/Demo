@@ -17,4 +17,12 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+    <!--设置登录输入框超出字数限制时提示文字颜色-->
+    <style name="TextOverCount" parent="Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
+        <item name="android:textColor">@android:color/holo_green_light</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">15dp</item>
+    </style>
 </resources>

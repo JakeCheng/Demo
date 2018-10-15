@@ -7,4 +7,7 @@
     <string name="no_content">还没有内容呢</string>
     <string name="network_connect_error">网络连接超时\\n请稍后再试</string>
     <string name="server_in_error">网络异常\\n请稍后再试</string>
+    <string name="action_sign_in">登陆或注册</string>
+    <string name="prompt_email">请输入邮箱</string>
+    <string name="prompt_password">请输入密码</string>
 </resources>

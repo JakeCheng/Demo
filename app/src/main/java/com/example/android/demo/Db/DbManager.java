@@ -7,11 +7,15 @@ import com.example.android.demo.GreenDao.DBHelper;
 import com.example.android.demo.GreenDao.DaoMaster;
 import com.example.android.demo.GreenDao.DaoSession;
 
+/**
+ * Created by android on 2018/10/15.
+ */
+
 public class DbManager {
     // 是否加密
     public static final boolean ENCRYPTED = true;
 
-    private static final String DB_NAME = "KeDouYun.db";
+    private static final String DB_NAME = "Demo.db";
     private static DbManager mDbManager;
     private static DBHelper mDevOpenHelper;
     private static DaoMaster mDaoMaster;

@@ -18,15 +18,11 @@ public class MyDaoMaster extends DaoMaster {
             DaoConfig daoConfig = new DaoConfig(db, daoClasses[i]);
             String tableName = daoConfig.tablename;
             switch (tableName){
-                case "STUDENT":
-                    StudentDao.createTable(db, ifNotExists);
-                    break;
-                case "TEACHER":
-                    TeacherDao.createTable(db, ifNotExists);
+                case "USER":
+                    UserDao.createTable(db, ifNotExists);
                     break;
                 default:
-                    StudentDao.createTable(db, ifNotExists);
-                    TeacherDao.createTable(db, ifNotExists);
+                    UserDao.createTable(db, ifNotExists);
                     break;
             }
         }
@@ -36,15 +32,11 @@ public class MyDaoMaster extends DaoMaster {
             DaoConfig daoConfig = new DaoConfig(db, daoClasses[i]);
             String tableName = daoConfig.tablename;
             switch (tableName){
-                case "STUDENT":
-                    StudentDao.dropTable(db, ifExists);
-                    break;
-                case "TEACHER":
-                    TeacherDao.dropTable(db, ifExists);
+                case "USER":
+                    UserDao.dropTable(db, ifExists);
                     break;
                 default:
-                    StudentDao.dropTable(db, ifExists);
-                    TeacherDao.dropTable(db, ifExists);
+                    UserDao.dropTable(db, ifExists);
                     break;
             }
         }

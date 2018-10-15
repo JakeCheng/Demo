@@ -8,6 +8,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -16,14 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Ui.DemoActivity" />
+        <activity android:name=".Ui.Activity.MainActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Ui.Activity.DemoActivity" />
         <!-- 网络变化判断 -->
         <receiver
             android:name=".Service.NetworkReceiver"
@@ -33,17 +33,24 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Ui.DBGreenDaoActivity" />
         <service
             android:name=".Service.BookService"
             android:enabled="true"
             android:exported="true"
             android:process=":aidl" />
-        <activity android:name=".Ui.AIDLActivity" />
-        <activity android:name=".Ui.MyViewActivity" />
-        <activity android:name=".Ui.MoveActivity" />
-        <activity android:name=".Ui.MyServiceActivity" />
-        <activity android:name=".Ui.MyRecyclerViewActivity"></activity>
+
+        <activity android:name=".Ui.Activity.AIDLActivity" />
+        <activity android:name=".Ui.Activity.MyViewActivity" />
+        <activity android:name=".Ui.Activity.MoveActivity" />
+        <activity android:name=".Ui.Activity.MyRecyclerViewActivity" />
+        <activity android:name=".Ui.Activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Ui.Activity.LoginActivity"/>
     </application>
 
 </manifest>

@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity <T extends BasePresenter> extends AppCompatActivity implements BaseView{
     protected T mPresenter;
     protected BaseActivity mContext;
-    protected DaoSession mDaoSession;
     protected MyApplication application;
     protected String TAG;
     @Override
@@ -52,7 +51,6 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         if (!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
-        mDaoSession = DbManager.getDaoSession(mContext);
         setContentView(getRootViewId());
         ButterKnife.bind(this);
         application = (MyApplication) mContext.getApplication();
@@ -104,6 +102,9 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         super.onDestroy();
         if (EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().unregister(this);
+        }
+        if (mPresenter != null){
+            mPresenter.detachView();
         }
         MyAppManager.getInstance().deleteLastActivity();
     }

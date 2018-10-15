@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.android.demo.R;
 
-
+/**
+ * 加载中提示
+ */
 public class ProgressDialog {
 
     public static Dialog createLoadingDialog(Context context, String str) {

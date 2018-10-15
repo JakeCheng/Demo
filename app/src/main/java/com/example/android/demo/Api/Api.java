@@ -14,4 +14,8 @@ public class Api {
         }
         return apiService;
     }
+
+//    public static void initPostLogin(String telephone, String number, String type, String id, String sign, SimpleCallback<LoginBean> callback) {
+//        ApiObserver.subscribe(getApiService().initPostLogin(telephone,number,type,id,sign),callback);
+//    }
 }

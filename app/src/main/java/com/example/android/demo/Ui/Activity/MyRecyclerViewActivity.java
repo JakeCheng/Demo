@@ -1,4 +1,4 @@
-package com.example.android.demo.Ui;
+package com.example.android.demo.Ui.Activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -6,26 +6,34 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.android.demo.Adapter.DemoItemTypeAdapter;
 import com.example.android.demo.Base.BaseActivity;
 import com.example.android.demo.Bean.DemoItemBean;
+import com.example.android.demo.MyView.CustomLoadMoreView;
 import com.example.android.demo.R;
-import com.example.android.demo.View.CustomLoadMoreView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class MyRecyclerViewActivity extends BaseActivity {
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.mSwipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     DemoItemBean bean;
     List<DemoItemBean.DateBean> listDate = new ArrayList<>();
     DemoItemBean.DateBean itemBean;
     //DemoAdapter mAdapter;
     DemoItemTypeAdapter mAdapter;
     LinearLayoutManager layoutManager;
-    SwipeRefreshLayout mSwipeRefreshLayout;
     View headerView;
 
     @Override
@@ -35,8 +43,7 @@ public class MyRecyclerViewActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        mRecyclerView = findViewById(R.id.mRecyclerView);
-        mSwipeRefreshLayout = findViewById(R.id.mSwipeRefreshLayout);
+        tv_title.setText("上拉加载更多");
     }
 
     @Override
@@ -132,7 +139,14 @@ public class MyRecyclerViewActivity extends BaseActivity {
 
 
     }
-
+    @OnClick({R.id.iv_left})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_left:
+                finish();
+                break;
+        }
+    }
     @Override
     public void onError(Throwable e) {
 

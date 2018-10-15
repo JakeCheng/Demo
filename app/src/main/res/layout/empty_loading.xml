@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <com.example.android.demo.View.LoadingView
+    <com.example.android.demo.MyView.LoadingView
         android:id="@+id/loading_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone" />
 
-    <com.example.android.demo.View.EmptyView
+    <com.example.android.demo.MyView.EmptyView
         android:id="@+id/empty_display"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

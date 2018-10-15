@@ -1,4 +1,4 @@
-package com.example.android.demo.Ui;
+package com.example.android.demo.Ui.Activity;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -16,8 +16,6 @@ import com.example.android.demo.IBookManager;
 import com.example.android.demo.R;
 import com.example.android.demo.Service.BookService;
 import com.google.gson.Gson;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 import java.util.Random;
@@ -47,7 +45,6 @@ public class AIDLActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
         Intent intent = new Intent(this, BookService.class);
         bindService(intent, connection, BIND_AUTO_CREATE);
     }
@@ -97,6 +94,5 @@ public class AIDLActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(connection);
-        EventBus.getDefault().unregister(this);
     }
 }
