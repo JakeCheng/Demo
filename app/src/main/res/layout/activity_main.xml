@@ -5,48 +5,20 @@
     android:layout_height="match_parent"
     android:background="@color/BackGroundColor"
     android:orientation="vertical">
-    <android.support.design.widget.TabLayout
-        android:id="@+id/mTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@android:color/holo_red_light"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
-        app:tabTextColor="@android:color/black" />
     <android.support.v4.view.ViewPager
         android:id="@+id/mViewPager"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-
-    <!--<Button-->
-    <!--android:id="@+id/btn_aidl"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="AIDL"/>-->
-    <!--<Button-->
-    <!--android:id="@+id/btn_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="自定义View"-->
-    <!--android:textAllCaps="false"/>-->
-    <!--<Button-->
-    <!--android:id="@+id/btn_permission"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="权限问题"/>-->
-    <!--<Button-->
-    <!--android:id="@+id/btn_move"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="跟手滑动"/>-->
-    <!--<Button-->
-    <!--android:id="@+id/btn_recyclerview"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="RecyclerView"-->
-    <!--android:textAllCaps="false"/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color_black_20"/>
+    <com.example.android.demo.MyView.ViewPageTabBar
+        android:id="@+id/tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_dimen_48"
+        android:background="@android:color/white"
+        android:gravity="center_vertical" />
 </LinearLayout>

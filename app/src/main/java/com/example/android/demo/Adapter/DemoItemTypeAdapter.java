@@ -3,7 +3,7 @@ package com.example.android.demo.Adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
-import com.example.android.demo.Bean.DemoItemBean;
+import com.example.android.demo.Model.DemoItemBean;
 import com.example.android.demo.R;
 
 import java.util.List;

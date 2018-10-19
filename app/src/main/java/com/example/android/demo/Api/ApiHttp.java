@@ -43,7 +43,7 @@ public class ApiHttp {
         if(mRetrofit == null){
 
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl("")
+                    .baseUrl("http://apis.juhe.cn")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory( RxJava2CallAdapterFactory.create())
                     .client(getOkHttpClient())

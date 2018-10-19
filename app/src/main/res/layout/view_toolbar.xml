@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:padding="10dp"
             android:textSize="18dp"
+            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
@@ -54,5 +55,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/BackGroundColor"/>
+        android:background="@color/text_color_black_20"/>
 </LinearLayout>

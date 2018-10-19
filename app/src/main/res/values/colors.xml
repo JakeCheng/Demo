@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="color_red">#88FF0000</color>
     <color name="white">#FFFFFF</color>
     <color name="BackGroundColor">#F8F8F8</color>
+    <color name="color_14b9c7">#14B9C7</color>
+    <color name="color_black_trans_40">#66000000</color>
+    <color name="color_bbbbbb">#BBB</color>
+    <color name="text_color_black_20">#33000000</color>
+    <color name="alpha_white">#49ffffff</color>
+    <color name="alpha_black">#49000000</color>
 </resources>

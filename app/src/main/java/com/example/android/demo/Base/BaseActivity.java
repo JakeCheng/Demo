@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.android.demo.BuildConfig;
-import com.example.android.demo.Db.DbManager;
-import com.example.android.demo.GreenDao.DaoSession;
 import com.example.android.demo.MyApplication;
 import com.example.android.demo.Service.NetWorkChangeEvent;
 import com.example.android.demo.Utils.MyAppManager;
@@ -21,6 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public abstract class BaseActivity <T extends BasePresenter> extends AppCompatActivity implements BaseView{
     protected T mPresenter;

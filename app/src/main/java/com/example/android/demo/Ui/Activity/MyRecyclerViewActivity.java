@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.android.demo.Adapter.DemoItemTypeAdapter;
 import com.example.android.demo.Base.BaseActivity;
-import com.example.android.demo.Bean.DemoItemBean;
+import com.example.android.demo.Model.DemoItemBean;
 import com.example.android.demo.MyView.CustomLoadMoreView;
 import com.example.android.demo.R;
 

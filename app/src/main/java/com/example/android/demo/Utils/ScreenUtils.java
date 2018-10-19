@@ -32,8 +32,14 @@ public class ScreenUtils {
         return dm;
     }
 
-    public static void showPermission(final Context mContext,String title) {
+    public static void showPermission(final Context mContext,int type) {
+        String title = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        switch (type){
+            case 1:
+                title = "下载图片等功能需要获取系统权限，否则将上传失败";
+                break;
+        }
         builder.setTitle(title);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override

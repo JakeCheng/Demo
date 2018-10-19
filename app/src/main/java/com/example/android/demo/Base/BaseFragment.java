@@ -95,4 +95,15 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public void onPause() {
         super.onPause();
     }
+
+
+
+
+    private OnVisibleListener mOnVisibleListener;
+    public interface OnVisibleListener {
+        void onVisibilityChanged(boolean isVisibileToUser);
+    }
+    public void setOnVisibleListener(OnVisibleListener onVisibleListener) {
+        mOnVisibleListener = onVisibleListener;
+    }
 }

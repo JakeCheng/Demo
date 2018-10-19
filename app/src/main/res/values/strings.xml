@@ -12,4 +12,11 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
+    <string name="main_tab_cookbook">CookBook</string>
+    <string name="main_tab_movie">Movie</string>
+    <string name="main_tab_composition">Composition</string>
+    <string name="main_tab_data">Data</string>
+    <string name="save">Save</string>
+    <string name="saved_success">Saved Success</string>
+    <string name="saved_failed">Saved Failed</string>
 </resources>

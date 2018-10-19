@@ -21,8 +21,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ui.Activity.MainActivity"
-            android:launchMode="singleTask"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.android.demo.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <activity
+            android:name=".Ui.Activity.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".Ui.Activity.DemoActivity" />
         <!-- 网络变化判断 -->
         <receiver
@@ -50,7 +60,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ui.Activity.LoginActivity"/>
+        <activity android:name=".Ui.Activity.LoginActivity" />
+        <activity
+            android:name=".Ui.Activity.ShowWebImageActivity"
+            android:theme="@style/SlideCloseTheme"/>
+        <activity android:name=".Ui.Activity.CookBookDetailActivity"
+            android:theme="@style/FullTheme"/>
     </application>
 
 </manifest>

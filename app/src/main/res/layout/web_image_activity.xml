@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.example.android.demo.MyView.SlideCloseLayout
+            android:id="@+id/slideCloseLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.example.android.demo.MyView.PhotoViewViewPager
+                android:id="@+id/vp_image_browser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.example.android.demo.MyView.SlideCloseLayout>
+        <TextView
+            android:id="@+id/tv_image_index"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/shape_corner_rect_gray"
+            android:gravity="center"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="1/9"
+            style="@style/White17"
+            android:layout_alignParentBottom="true" />
+        <TextView
+            android:id="@+id/tv_image_download"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/shape_corner_rect_gray"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/save"
+            style="@style/White17"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+</LinearLayout>

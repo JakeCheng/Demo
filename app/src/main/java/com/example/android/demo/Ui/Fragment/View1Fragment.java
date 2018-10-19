@@ -1,39 +1,65 @@
 package com.example.android.demo.Ui.Fragment;
 
-import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.android.demo.Adapter.View1Adapter;
+import com.example.android.demo.Adapter.FragmentPagerAdapter;
 import com.example.android.demo.Base.BaseFragment;
+import com.example.android.demo.Model.CookBookModel;
+import com.example.android.demo.MyView.ViewPagerScrollTabBar;
+import com.example.android.demo.Presenter.CookBookPresenter;
 import com.example.android.demo.R;
-import com.example.android.demo.Ui.Activity.MyRecyclerViewActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.android.demo.Utils.ACache;
+import com.example.android.demo.Utils.Constants;
+import com.example.android.demo.Utils.NetWorkUtils;
+import com.example.android.demo.View.CookBookView;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 
-/**
- * Created by android on 2018/10/15.
- */
-
-public class View1Fragment extends BaseFragment {
-    @BindView(R.id.mRecyclerView)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.mSwipeRefreshLayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
-    private GridLayoutManager layoutManager;
-    private List<String> listDate;
-    private View1Adapter mAdapter;
+public class View1Fragment extends BaseFragment<CookBookPresenter> implements CookBookView,ViewPager.OnPageChangeListener{
+    @BindView(R.id.iv_left)
+    ImageView iv_left;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.tab_bar)
+    ViewPagerScrollTabBar mTabBar;
+    @BindView(R.id.view_pager)
+    ViewPager mViewPager;
+    @BindView(R.id.tab_bar_line)
+    View mTabBarLine;
+    private FragmentPagerAdapter mAdapter;
+    private ACache mACache;
+    private String cache;
+    private CookBookModel bean;
     @Override
     public void onLazyLoad() {
-
+        initDateGet();
     }
+
+    private void initDateGet() {
+        cache = mACache.getAsString(Constants.CookBookDate);
+        if (!TextUtils.isEmpty(cache)){
+            bean = new Gson().fromJson(cache,CookBookModel.class);
+            initShow();
+        }else {
+            if (NetWorkUtils.isConnected(mContext)) {
+                //获取标签信息
+                mPresenter.initCookBookDateGet("");
+            }
+        }
+    }
+
+    private void initShow() {
+        initViewPager();
+        initTab();
+    }
+
     @Override
     public int getRootViewId() {
         return R.layout.view_1_fragment;
@@ -41,32 +67,55 @@ public class View1Fragment extends BaseFragment {
 
     @Override
     public void initView() {
-        mSwipeRefreshLayout.setEnabled(false);
-        layoutManager = new GridLayoutManager(mContext,2);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-        //mRecyclerView.addItemDecoration(new DividerGridItemDecoration(mContext,DividerGridItemDecoration.GRID_DIVIDER_VERTICAL));
+        mACache = ACache.get(mContext);
+        iv_left.setVisibility(View.GONE);
+        tv_title.setText(getResources().getString(R.string.main_tab_cookbook));
+    }
 
-        listDate = new ArrayList<>();
-        listDate.add("上拉加载更多");
+    private void initViewPager() {
+        mAdapter = new FragmentPagerAdapter(this,mContext,getChildFragmentManager(),mViewPager);
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(bean.getResult().size());
+        if (mAdapter.getCount() != 0) {
+            mAdapter.clearFragmens();
+        }
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        for (CookBookModel.ResultBean resultBean : bean.getResult()) {
+            addFragment(resultBean);
+        }
+        ft.commitAllowingStateLoss();
 
-        mAdapter = new View1Adapter(R.layout.item_view1,listDate);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+    }
+
+    private void addFragment(CookBookModel.ResultBean resultBean) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data",resultBean);
+        mAdapter.addFragment(resultBean.getName(),ViewCookBookFragment.class,bundle);
+
+    }
+
+    private void initTab() {
+        mTabBar.setFakeBoldText(true);
+        mTabBar.setTabLeftPadding(getResources().getDimensionPixelSize(R.dimen.activity_tab_bar_padding));
+        mTabBar.setTabRightPadding(getResources().getDimensionPixelSize(R.dimen.activity_tab_bar_padding));
+
+        mTabBar.setCustomTabColorizer(new ViewPagerScrollTabBar.TabColorizer() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (position){
-                    case 0:
-                        startActivity(new Intent(mContext, MyRecyclerViewActivity.class));
-                        break;
-                }
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.color_14b9c7);
             }
         });
+
+        mTabBar.setTitleColor(getResources().getColor(R.color.color_14b9c7), getResources().getColor(R.color.color_black_trans_40));
+        mTabBar.setOnPageChangeListener(this);
+        mTabBar.setIsDiffWithTab(true);
+        mTabBar.setNeedMatchPrent(true);
+        mTabBar.setViewPager(mViewPager);
     }
 
     @Override
     public void initPresenter() {
-
+        mPresenter = new CookBookPresenter();
     }
 
     @Override
@@ -81,5 +130,29 @@ public class View1Fragment extends BaseFragment {
     @Override
     public void onCompleted() {
 
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mTabBarLine.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onCookBookDateGet(CookBookModel bean) {
+        if (bean.getResultcode().equals("200")){
+            this.bean = bean;
+            mACache.put(Constants.CookBookDate,new Gson().toJson(bean));
+            initShow();
+        }
     }
 }

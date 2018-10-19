@@ -1,26 +1,30 @@
 package com.example.android.demo.Api;
 
+import com.example.android.demo.Model.CookBookModel;
+import com.example.android.demo.Model.CookBookRightModel;
+
+import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+
 public interface ApiService {
     /**
-     * 登录
-     *
-     * @param telephone
-     * @param number
-     * @param type
-     * @param id
-     * @param sign
+     * 菜单标签信息
+     * @param parentid
+     * @param key
      * @return
      */
-//    @FormUrlEncoded
-//    @POST("/base/user/login")
-//    Observable<LoginBean> initPostLogin(@Field("phone") String telephone, @Field("vld_code") String number, @Field("loginType") String type, @Field("weChatId") String id, @Field("sign") String sign);
-
+    @FormUrlEncoded
+    @POST("/cook/category")
+    Observable<CookBookModel> initCookBookDateGet(@Field("parentid") String parentid,@Field("key") String key);
     /**
-     * 上传手机设备信息
-     *
+     * 根据标签查询
+     * @param cid
+     * @param key
      * @return
      */
-//    @FormUrlEncoded
-//    @POST("/dev/add")
-//    Observable<FirstBean> initEquipmentMessage(@FieldMap Map<String, String> map);
+    @FormUrlEncoded
+    @POST("/cook/index")
+    Observable<CookBookRightModel> initCookBookRightDateGet(@Field("cid") String cid,@Field("key") String key);
 }

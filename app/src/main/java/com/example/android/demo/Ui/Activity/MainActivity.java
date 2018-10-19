@@ -1,39 +1,36 @@
 package com.example.android.demo.Ui.Activity;
 
-import android.Manifest;
-import android.content.Intent;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Process;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
-import com.example.android.demo.Adapter.MyPagerAdapter;
+import com.example.android.demo.Adapter.FragmentPagerAdapter;
 import com.example.android.demo.Base.BaseActivity;
+import com.example.android.demo.Base.BaseFragment;
+import com.example.android.demo.MyView.ViewPageTabBar;
+import com.example.android.demo.Presenter.MainPresenter;
 import com.example.android.demo.R;
 import com.example.android.demo.Service.NetworkReceiver;
 import com.example.android.demo.Ui.Fragment.View1Fragment;
 import com.example.android.demo.Ui.Fragment.View2Fragment;
-import com.example.android.demo.Utils.Constants;
-import com.example.android.demo.Utils.ScreenUtils;
-
-import java.util.List;
+import com.example.android.demo.View.MainView;
 
 import butterknife.BindView;
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
-    private static final int RC_CAMERA_AND_WIFI = 10;
-    private NetworkReceiver mNetworkReceiver;
-    private MyPagerAdapter mAdapter;
-    @BindView(R.id.mTabLayout)
-    TabLayout mTabLayout;
+public class MainActivity extends BaseActivity<MainPresenter> implements MainView,
+        ViewPageTabBar.OnTabBarClickListener,ViewPager.OnPageChangeListener{
+    @BindView(R.id.tab_bar)
+    ViewPageTabBar mTabBar;
     @BindView(R.id.mViewPager)
     ViewPager mViewPager;
+    private static final int RC_CAMERA_AND_WIFI = 10;
+    private NetworkReceiver mNetworkReceiver;
+    private FragmentPagerAdapter mPagerAdapter;
+    private BaseFragment mCurrentFragment;
+    private int mCurrentPageIndex;
 
     @Override
     public int getRootViewId() {
@@ -54,59 +51,40 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         super.onCreate(savedInstanceState);
         mNetworkReceiver = new NetworkReceiver();
         mNetworkReceiver.register(this);
-        Log.e(TAG, "onCreate: MainActivity");
     }
 
     @Override
     public void initView(Bundle savedInstanceState) {
         Log.e(TAG, "initView: "+ Process.myUid());
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        mAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new View1Fragment(), Constants.ItemName[0]);
-        mAdapter.addFragment(new View2Fragment(), Constants.ItemName[1]);
-        for (String anItemName : Constants.ItemName) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(anItemName));
-        }
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setOffscreenPageLimit(2);
-        mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-   /* @OnClick({R.id.btn_aidl,R.id.btn_view,R.id.btn_permission,R.id.btn_move,R.id.btn_recyclerview})
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_aidl:
-                startActivity(new Intent(mContext,AIDLActivity.class));
-                break;
-            case R.id.btn_view:
-                startActivity(new Intent(mContext,MyViewActivity.class));
-                break;
-            case R.id.btn_permission:
-                getPermission();
-                break;
-            case R.id.btn_move:
-                startActivity(new Intent(mContext,MoveActivity.class));
-                break;
-            case R.id.btn_recyclerview:
-                startActivity(new Intent(mContext,MyRecyclerViewActivity.class));
-                break;
-        }
-    }*/
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        mTabBar.setOnTabBarClickListener(this);
+        mPagerAdapter = new FragmentPagerAdapter(mCurrentFragment,this,getSupportFragmentManager(),mViewPager);
+        mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setOnPageChangeListener(this);
+        mViewPager.setOffscreenPageLimit(4);
     }
 
     @Override
     public void initPresenter() {
-
+        mPresenter = new MainPresenter();
     }
 
     @Override
     public void initData() {
+        mCurrentPageIndex = 0;
+        mPresenter.initData(mCurrentPageIndex);
+        initFragments();
+    }
 
+    private void initFragments() {
+        FragmentTransaction trans = getFragmentManager().beginTransaction();
+        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_cookbook), View1Fragment.class, null);
+        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_movie), View2Fragment.class, null);
+        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_composition), View2Fragment.class, null);
+        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_data), View2Fragment.class, null);
+        trans.commitAllowingStateLoss();
+        if (mCurrentPageIndex != 0) {
+            mViewPager.setCurrentItem(mCurrentPageIndex, false);
+        }
     }
 
     @Override
@@ -120,31 +98,61 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
     @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-        Log.d(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-        Log.d(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            ScreenUtils.showPermission(mContext,"没有此权限，无法开启这个功能，请开启权限。WRITE_EXTERNAL_STORAGE");
-        }
-    }
-    @AfterPermissionGranted(RC_CAMERA_AND_WIFI)
-    public void getPermission() {
-        if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            // Have permission, do the thing!
-            startActivity(new Intent(mContext,MyViewActivity.class));
-        } else {
-            // Ask for one permission
-            ActivityCompat.requestPermissions(mContext, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, RC_CAMERA_AND_WIFI);
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         mNetworkReceiver.unregister(this);
+    }
+
+    @Override
+    public void onTabBarClick(int index) {
+        mPresenter.onTabBarClick(index);
+    }
+
+    @Override
+    public void onTabBarDoubleClick() {
+        if (mCurrentFragment == null) {
+            mCurrentFragment = (BaseFragment) mPagerAdapter.getFragment(mCurrentPageIndex, false);
+            if (mCurrentFragment == null) {
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void addTab(int titleId, int drawableId, boolean isFirst, boolean isLast) {
+        mTabBar.addHomeTab(titleId, drawableId, isFirst, isLast);
+    }
+
+    @Override
+    public void setTabDefaultSelect(int index) {
+        mTabBar.setTabSelected(index);
+        changeFragment(index, false);
+    }
+
+    @Override
+    public void changeFragment(int index, boolean isScroll) {
+        if (mCurrentPageIndex == index) {
+            return;
+        }
+        mCurrentPageIndex = index;
+        mCurrentFragment = (BaseFragment) mPagerAdapter.getFragment(index, false);
+        mViewPager.setCurrentItem(index, isScroll);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mCurrentPageIndex = position;
+        if (null != mTabBar) {
+            mTabBar.setTabSelected(position);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 }
