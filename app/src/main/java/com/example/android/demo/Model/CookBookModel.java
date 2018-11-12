@@ -9,30 +9,13 @@ import java.util.List;
  * Created by android on 2018/10/18.
  */
 
-public class CookBookModel implements Parcelable {
+public class CookBookModel extends BaseModel implements Parcelable{
     private String resultcode;
-    private String reason;
-    private int error_code;
     private List<ResultBean> result;
 
     protected CookBookModel(Parcel in) {
-        resultcode = in.readString();
-        reason = in.readString();
-        error_code = in.readInt();
-        result = in.createTypedArrayList(ResultBean.CREATOR);
+        super(in);
     }
-
-    public static final Creator<CookBookModel> CREATOR = new Creator<CookBookModel>() {
-        @Override
-        public CookBookModel createFromParcel(Parcel in) {
-            return new CookBookModel(in);
-        }
-
-        @Override
-        public CookBookModel[] newArray(int size) {
-            return new CookBookModel[size];
-        }
-    };
 
     public String getResultcode() {
         return resultcode;
@@ -42,21 +25,6 @@ public class CookBookModel implements Parcelable {
         this.resultcode = resultcode;
     }
 
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public int getError_code() {
-        return error_code;
-    }
-
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
-    }
 
     public List<ResultBean> getResult() {
         return result;
@@ -66,18 +34,6 @@ public class CookBookModel implements Parcelable {
         this.result = result;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(resultcode);
-        dest.writeString(reason);
-        dest.writeInt(error_code);
-        dest.writeTypedList(result);
-    }
 
     public static class ResultBean implements Parcelable {
         private String parentId;

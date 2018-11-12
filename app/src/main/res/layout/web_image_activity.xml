@@ -29,7 +29,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:text="1/9"
-            style="@style/White17"
+            style="@style/White18"
             android:layout_alignParentBottom="true" />
         <TextView
             android:id="@+id/tv_image_download"
@@ -45,7 +45,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
             android:text="@string/save"
-            style="@style/White17"
+            style="@style/White18"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
 

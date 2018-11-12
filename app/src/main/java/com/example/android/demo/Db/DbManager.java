@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.android.demo.GreenDao.DBHelper;
 import com.example.android.demo.GreenDao.DaoMaster;
 import com.example.android.demo.GreenDao.DaoSession;
+import com.example.android.demo.Utils.Constants;
 
 /**
  * Created by android on 2018/10/15.
@@ -80,7 +81,7 @@ public class DbManager {
             synchronized (DbManager.class) {
                 if (null == mDaoMaster) {
                     DBHelper helper = new DBHelper(context,DB_NAME);
-                    mDaoMaster = new DaoMaster(helper.getWritableDatabase());
+                    mDaoMaster = new DaoMaster(helper.getEncryptedWritableDb(Constants.PASSWORD));
                 }
             }
         }

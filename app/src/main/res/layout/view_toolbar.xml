@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="@dimen/dp_48"
     android:orientation="vertical"
     android:background="@color/white">
     <RelativeLayout
@@ -16,6 +16,7 @@
             android:padding="10dp"
             android:visibility="gone"
             android:drawableLeft="@mipmap/back"
+            android:textSize="@dimen/sp_16"
             android:drawablePadding="5dp"
             android:layout_centerVertical="true"/>
         <ImageView
@@ -31,7 +32,7 @@
             android:singleLine="true"
             android:layout_width="wrap_content"
             android:padding="10dp"
-            android:textSize="18dp"
+            android:textSize="@dimen/sp_18"
             android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="10dp"
-            android:textSize="15dp"
+            android:textSize="@dimen/sp_16"
             android:gravity="center_vertical"
             android:layout_alignParentRight="true"/>
         <ImageView
@@ -54,6 +55,6 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dp_1"
         android:background="@color/text_color_black_20"/>
 </LinearLayout>

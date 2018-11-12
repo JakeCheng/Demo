@@ -75,16 +75,6 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         }
         return false;
     }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

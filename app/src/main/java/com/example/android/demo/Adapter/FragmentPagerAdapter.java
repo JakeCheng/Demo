@@ -58,7 +58,7 @@ public class FragmentPagerAdapter extends PagerAdapter implements ViewPager.OnPa
 	private int mDefaultIndex = 0;
 
 	public FragmentPagerAdapter(BaseFragment parentFragment, Context context, FragmentManager fm,
-								ViewPager viewPager){
+                                ViewPager viewPager){
 		mParentFragment = parentFragment;
 		if(mParentFragment != null){
 			mParentFragment.setOnVisibleListener(new BaseFragment.OnVisibleListener() {
@@ -87,7 +87,7 @@ public class FragmentPagerAdapter extends PagerAdapter implements ViewPager.OnPa
 	 * @param viewPager
 	 */
 	public FragmentPagerAdapter(BaseFragment parentFragment, Context context, FragmentManager fm,
-								VerticalViewPager viewPager){
+                                VerticalViewPager viewPager){
 		mParentFragment = parentFragment;
 		if(mParentFragment != null){
 			mParentFragment.setOnVisibleListener(new BaseFragment.OnVisibleListener() {

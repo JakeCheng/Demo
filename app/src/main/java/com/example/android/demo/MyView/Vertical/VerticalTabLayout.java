@@ -72,7 +72,6 @@ public class VerticalTabLayout extends NestedScrollView {
         mIndicatorCorners = typedArray.getDimension(R.styleable.VerticalTabLayout_indicator_corners, 0);
         mIndicatorGravity = typedArray.getInteger(R.styleable.VerticalTabLayout_indicator_gravity, Gravity.LEFT);
         mTabMargin = (int) typedArray.getDimension(R.styleable.VerticalTabLayout_tab_margin, 0);
-        Logger.error(TAG,"==========tab margin========" + mTabMargin);
         mTabMode = typedArray.getInteger(R.styleable.VerticalTabLayout_tab_mode, TAB_MODE_FIXED);
         mTabHeight = (int) typedArray.getDimension(R.styleable.VerticalTabLayout_tab_height, LayoutParams.WRAP_CONTENT);
         typedArray.recycle();
@@ -107,8 +106,7 @@ public class VerticalTabLayout extends NestedScrollView {
             tabView.setChecked(true);
             params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
             //整体距离上边的距离
-            params.setMargins(0, getResources().getDimensionPixelOffset(R.dimen.view_dimen_7), 0, 0);
-            Logger.error(TAG,"==========tab margin===111=====" + mTabMargin);
+            params.setMargins(0, getResources().getDimensionPixelOffset(R.dimen.dp_7), 0, 0);
             tabView.setLayoutParams(params);
             mSelectedTab = tabView;
         }

@@ -10,12 +10,15 @@ import android.util.Log;
 import com.example.android.demo.Adapter.FragmentPagerAdapter;
 import com.example.android.demo.Base.BaseActivity;
 import com.example.android.demo.Base.BaseFragment;
+import com.example.android.demo.MyView.CustomViewPager;
 import com.example.android.demo.MyView.ViewPageTabBar;
 import com.example.android.demo.Presenter.MainPresenter;
 import com.example.android.demo.R;
 import com.example.android.demo.Service.NetworkReceiver;
 import com.example.android.demo.Ui.Fragment.View1Fragment;
 import com.example.android.demo.Ui.Fragment.View2Fragment;
+import com.example.android.demo.Ui.Fragment.View3Fragment;
+import com.example.android.demo.Ui.Fragment.View4Fragment;
 import com.example.android.demo.View.MainView;
 
 import butterknife.BindView;
@@ -25,8 +28,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @BindView(R.id.tab_bar)
     ViewPageTabBar mTabBar;
     @BindView(R.id.mViewPager)
-    ViewPager mViewPager;
-    private static final int RC_CAMERA_AND_WIFI = 10;
+    CustomViewPager mViewPager;
     private NetworkReceiver mNetworkReceiver;
     private FragmentPagerAdapter mPagerAdapter;
     private BaseFragment mCurrentFragment;
@@ -79,22 +81,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         FragmentTransaction trans = getFragmentManager().beginTransaction();
         mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_cookbook), View1Fragment.class, null);
         mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_movie), View2Fragment.class, null);
-        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_composition), View2Fragment.class, null);
-        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_data), View2Fragment.class, null);
+        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_view), View3Fragment.class, null);
+        mPagerAdapter.addFragment(getResources().getString(R.string.main_tab_data), View4Fragment.class, null);
         trans.commitAllowingStateLoss();
         if (mCurrentPageIndex != 0) {
             mViewPager.setCurrentItem(mCurrentPageIndex, false);
         }
-    }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
     }
 
     @Override

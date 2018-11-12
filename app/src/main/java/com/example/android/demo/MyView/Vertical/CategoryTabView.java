@@ -219,7 +219,7 @@ public class CategoryTabView extends TabView {
         refreshDrawableState();
         if (mChecked) {
             mTitle.setTextColor(mTabTitle.mColorSelected);
-            mTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelOffset(R.dimen.activity_tab_bar_size));
+            mTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelOffset(R.dimen.sp_13));
             mTitle.getPaint().setFakeBoldText(true);
             if (mTabIcon.mSelectedIcon != 0) {
                 mIcon.setVisibility(View.VISIBLE);
@@ -229,7 +229,7 @@ public class CategoryTabView extends TabView {
             }
         } else {
             mTitle.setTextColor(mTabTitle.mColorNormal);
-            mTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelOffset(R.dimen.activity_tab_bar_size));
+            mTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelOffset(R.dimen.sp_13));
             mTitle.getPaint().setFakeBoldText(false);
             if (mTabIcon.mNormalIcon != 0) {
                 mIcon.setVisibility(View.VISIBLE);

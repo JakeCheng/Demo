@@ -9,10 +9,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ApiObserver<T> implements Observer<T> {
 
+    private final SimpleCallback<T> mCallback;
 
-    private final ApiCallback<T> mCallback;
-
-    public ApiObserver(ApiCallback<T> callback){
+    public ApiObserver(SimpleCallback<T> callback){
         this.mCallback = callback;
     }
 
@@ -29,20 +28,20 @@ public class ApiObserver<T> implements Observer<T> {
     }
 
     @Override
+    public void onComplete() {
+        if (mCallback != null){
+            mCallback.onComplete();
+        }
+    }
+
+    @Override
     public void onNext(T t) {
         if(mCallback != null){
             mCallback.onNext(t);
         }
     }
 
-    @Override
-    public void onComplete() {
-        if(mCallback != null){
-            mCallback.onCompleted();
-        }
-    }
-
-    public static <T> ApiObserver<T> getApiObserver(ApiCallback<T> callback){
+    public static <T> ApiObserver<T> getApiObserver(SimpleCallback<T> callback){
         return new ApiObserver<>( callback );
     }
 

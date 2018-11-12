@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import butterknife.BindView;
 
 public class View1Fragment extends BaseFragment<CookBookPresenter> implements CookBookView,ViewPager.OnPageChangeListener{
+    private static final String TAG = "View1Fragment";
     @BindView(R.id.iv_left)
     ImageView iv_left;
     @BindView(R.id.tv_title)
@@ -37,6 +38,8 @@ public class View1Fragment extends BaseFragment<CookBookPresenter> implements Co
     private ACache mACache;
     private String cache;
     private CookBookModel bean;
+    private String session = "aa";
+    private boolean need = false;
     @Override
     public void onLazyLoad() {
         initDateGet();
@@ -96,8 +99,8 @@ public class View1Fragment extends BaseFragment<CookBookPresenter> implements Co
 
     private void initTab() {
         mTabBar.setFakeBoldText(true);
-        mTabBar.setTabLeftPadding(getResources().getDimensionPixelSize(R.dimen.activity_tab_bar_padding));
-        mTabBar.setTabRightPadding(getResources().getDimensionPixelSize(R.dimen.activity_tab_bar_padding));
+        mTabBar.setTabLeftPadding(getResources().getDimensionPixelSize(R.dimen.dp_8));
+        mTabBar.setTabRightPadding(getResources().getDimensionPixelSize(R.dimen.dp_8));
 
         mTabBar.setCustomTabColorizer(new ViewPagerScrollTabBar.TabColorizer() {
             @Override
@@ -122,15 +125,6 @@ public class View1Fragment extends BaseFragment<CookBookPresenter> implements Co
     public void initData() {
 
     }
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -151,7 +145,7 @@ public class View1Fragment extends BaseFragment<CookBookPresenter> implements Co
     public void onCookBookDateGet(CookBookModel bean) {
         if (bean.getResultcode().equals("200")){
             this.bean = bean;
-            mACache.put(Constants.CookBookDate,new Gson().toJson(bean));
+            mACache.put(Constants.CookBookDate,new Gson().toJson(bean),Constants.CACHETIME);
             initShow();
         }
     }

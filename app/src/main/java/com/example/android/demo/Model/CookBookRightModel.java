@@ -5,26 +5,18 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class CookBookRightModel implements Parcelable{
-
+public class CookBookRightModel extends BaseModel implements Parcelable{
     private String resultcode;
-    private String reason;
     private ResultBean result;
-    private int error_code;
 
     protected CookBookRightModel(Parcel in) {
-        resultcode = in.readString();
-        reason = in.readString();
-        result = in.readParcelable(ResultBean.class.getClassLoader());
-        error_code = in.readInt();
+        super(in);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(resultcode);
-        dest.writeString(reason);
         dest.writeParcelable(result, flags);
-        dest.writeInt(error_code);
     }
 
     @Override
@@ -52,28 +44,12 @@ public class CookBookRightModel implements Parcelable{
         this.resultcode = resultcode;
     }
 
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
     public ResultBean getResult() {
         return result;
     }
 
     public void setResult(ResultBean result) {
         this.result = result;
-    }
-
-    public int getError_code() {
-        return error_code;
-    }
-
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
     }
 
     public static class ResultBean implements Parcelable{

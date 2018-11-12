@@ -42,7 +42,7 @@
             android:paddingBottom="8dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:background="@drawable/btn_colorprimary_3f51b5"
+            android:background="@drawable/btn_colorprimarydark_303f9f_radius"
             android:text="@string/button_refresh"
             android:textColor="@color/white"/>
     </LinearLayout>

@@ -243,7 +243,7 @@ class ViewPagerScrollTabStrip extends LinearLayout {
     }
 
     /**
-     * Set the alpha value of the {@code color} to be the given {@code alpha} value.
+     * Set the demo_tween_scale value of the {@code color} to be the given {@code demo_tween_scale} value.
      */
     private static int setColorAlpha(int color, byte alpha) {
         return Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color));

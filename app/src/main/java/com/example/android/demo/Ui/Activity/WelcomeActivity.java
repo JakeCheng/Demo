@@ -81,14 +81,4 @@ public class WelcomeActivity extends BaseActivity {
     public void initData() {
 
     }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
 }

@@ -20,7 +20,7 @@ import butterknife.BindView;
  * 菜单页面
  */
 
-public class ViewCookBookFragment extends BaseFragment{
+public class ViewCookBookFragment extends BaseFragment {
     @BindView(R.id.category_v_tablayout)
     VerticalTabLayout mTabLayout;
     @BindView(R.id.category_viewpager)
@@ -96,15 +96,6 @@ public class ViewCookBookFragment extends BaseFragment{
 
     @Override
     public void initData() {
-
-    }
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
 
     }
 

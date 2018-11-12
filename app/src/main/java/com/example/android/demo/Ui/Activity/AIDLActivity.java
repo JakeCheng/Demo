@@ -81,16 +81,6 @@ public class AIDLActivity extends BaseActivity {
     }
 
     @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(connection);

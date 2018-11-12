@@ -41,5 +41,4 @@ public class ProgressDialog {
         return loadingDialog;
 
     }
-
 }

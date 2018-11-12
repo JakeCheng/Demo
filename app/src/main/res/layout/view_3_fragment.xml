@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/view_toolbar"/>
+    <Button
+        android:id="@+id/btn_tween_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="补间动画"/>
+    <Button
+        android:id="@+id/btn_property_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="属性动画"/>
+    <Button
+        android:id="@+id/btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="基础自定义View"/>
+    <Button
+        android:id="@+id/btn_move"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="拖动View"/>
+</LinearLayout>
+

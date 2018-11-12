@@ -31,7 +31,7 @@ import butterknife.BindView;
  * 菜单页面
  */
 
-public class ViewCookBookRightFragment extends BaseFragment<CookBookRightPresenter> implements CookBookRightView{
+public class ViewCookBookRightFragment extends BaseFragment<CookBookRightPresenter> implements CookBookRightView {
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
     private String id,name;
@@ -81,6 +81,9 @@ public class ViewCookBookRightFragment extends BaseFragment<CookBookRightPresent
         name = bundle.getString("title");
         layoutManager = new GridLayoutManager(mContext,2);
         mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new CookBookRightAdapter(R.layout.item_cook_book_right,listDate);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.addHeaderView(view);
 
     }
     public void recyclerViewScroll(){
@@ -96,30 +99,19 @@ public class ViewCookBookRightFragment extends BaseFragment<CookBookRightPresent
     @Override
     public void initData() {
     }
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
 
     @Override
     public void onCookBookRightDateGet(CookBookRightModel bean) {
         this.bean = bean;
-        mACache.put(Constants.CookBookDate+id,new Gson().toJson(bean));
+        mACache.put(Constants.CookBookDate+id,new Gson().toJson(bean),Constants.CACHETIME);
         initShow();
     }
 
     private void initShow() {
         if (bean.getResultcode().equals("200")){
-            listDate = bean.getResult().getData();
-            mAdapter = new CookBookRightAdapter(R.layout.item_cook_book_right,listDate);
-            mRecyclerView.setAdapter(mAdapter);
+            listDate.addAll(bean.getResult().getData());
+            mAdapter.notifyDataSetChanged();
             tv_content.setText(name);
-            mAdapter.addHeaderView(view);
             if (mAdapter != null){
                 mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override

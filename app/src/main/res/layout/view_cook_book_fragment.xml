@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:visibility="visible"
             app:indicator_gravity="fill"
-            app:tab_height="@dimen/view_dimen_40"
+            app:tab_height="@dimen/dp_40"
             app:tab_mode="scrollable"/>
         <View
             android:id="@+id/category_v_line"

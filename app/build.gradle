@@ -21,23 +21,115 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('../demo.jks')
+            storeFile file('../demo1.jks')
             storePassword "111111"
-            keyAlias "gsAndroid"
+            keyAlias "demo"
             keyPassword "111111"
         }
     }
-    /* buildTypes {
+    buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
+            shrinkResources false
             signingConfig signingConfigs.release
         }
-    }*/
+    }
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+
+        //渠道包配置
+        flavorDimensions "default"
+        productFlavors {
+
+            huawei {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
+            }
+
+            oppo {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Oppo"]
+            }
+
+            _360 {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
+            }
+
+            qq {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yinhyongbao"]
+            }
+
+            anzhi {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "anzhi"]
+            }
+
+            yingyonghui {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyonghui"]
+            }
+
+            youyi {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "youyi"]
+            }
+
+            wandoujia {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+            }
+
+            pp {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "PP"]
+            }
+
+            _91 {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "91"]
+            }
+
+            baidu {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+            }
+
+            xiaomi {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+            }
+
+            guanwang {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "guanwang"]
+            }
+
+            _test {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "test"]
+            }
+
+        }
+    }
+
+    //App名称配置
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            variant.productFlavors.each { flavor ->
+                def project = "Demo"
+                def separator = "_"
+                def buildType = variant.variantData.variantConfiguration.buildType.name
+                def versionName = variant.versionName
+                def versionCode = variant.versionCode
+                def date = new Date()
+                def formattedDate = date.format('yyyyMMdd')
+
+                def apkName = project + separator + "v" + versionName + separator + versionCode + separator + buildType + separator + flavor.name + ".apk"
+                if (buildType == "release") {
+                    apkName = project + separator + "v" + versionName + separator + versionCode + separator + buildType + separator + flavor.name + separator + formattedDate + ".apk"
+                }
+
+                output.outputFileName = apkName
+            }
+        }
+    }
 }
 
 dependencies {
@@ -71,14 +163,23 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 
     implementation 'org.greenrobot:greendao:3.2.2'
+    //加密
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     //阿里云图片上传
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
     //图片选择器
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    //友盟多渠道打包
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+    //高的地图定位
+    implementation 'com.amap.api:location:4.3.0'
+    //图表框架
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
     //多渠道打包
     // implementation 'com.meituan.android.walle:library:1.1.6'

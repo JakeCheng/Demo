@@ -46,7 +46,7 @@ public class ViewPagerScrollTabBar extends HorizontalScrollView {
     private int frgCount;
     private int mSelectTextColor;
     private int mUnSelectTextColor;
-    private int mTitleSize = MyApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
+    private int mTitleSize = MyApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.sp_15);
     private int mTitleSelectSize = 0;
     private boolean mFakeBoldText = false;
     private Typeface mTypeface = Typeface.DEFAULT_BOLD;

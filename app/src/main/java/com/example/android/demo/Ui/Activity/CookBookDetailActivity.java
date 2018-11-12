@@ -50,6 +50,7 @@ public class CookBookDetailActivity extends BaseActivity {
     private String[] tagDate;
     private Intent intent;
     private ArrayList<String> images = new ArrayList<>();
+    private LinearLayoutManager layoutManager;
     @Override
     public int getRootViewId() {
         return R.layout.activity_cook_book_detail;
@@ -93,7 +94,9 @@ public class CookBookDetailActivity extends BaseActivity {
         tagDate = bean.getTags().split("[;]");
         tAdapter = new TagsAdapter(mContext,tagDate);
         mTagCloudLayout.setAdapter(tAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new CookBookDetailAdapter(R.layout.item_cook_book_detail,bean.getSteps());
         mRecyclerView.setAdapter(mAdapter);
 
@@ -110,16 +113,6 @@ public class CookBookDetailActivity extends BaseActivity {
                 }
             }
         });
-
-    }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
 
     }
 }

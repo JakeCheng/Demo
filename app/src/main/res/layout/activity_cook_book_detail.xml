@@ -7,7 +7,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/dp_200"
         android:fitsSystemWindows="true">
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             app:contentScrim="@color/white"
             app:statusBarScrim="?attr/colorPrimaryDark"
-            app:expandedTitleMarginStart="10dp"
+            app:expandedTitleMarginStart="@dimen/dp_20"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -29,7 +29,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/dp_48"
                 app:layout_collapseMode="pin"/>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -57,7 +57,7 @@
                 android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Black15"/>
+                style="@style/Black16"/>
             <TextView
                 android:id="@+id/tv_main"
                 android:paddingLeft="10dp"
@@ -65,7 +65,7 @@
                 android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Black13"/>
+                style="@style/Black14"/>
             <TextView
                 android:id="@+id/tv_seasoning"
                 android:paddingLeft="10dp"
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                style="@style/Black15"
+                style="@style/Black16"
                 android:text="做法步骤："/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mRecyclerView"

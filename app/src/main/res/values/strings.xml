@@ -14,9 +14,12 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="main_tab_cookbook">CookBook</string>
     <string name="main_tab_movie">Movie</string>
-    <string name="main_tab_composition">Composition</string>
+    <string name="main_tab_view">View</string>
     <string name="main_tab_data">Data</string>
     <string name="save">Save</string>
     <string name="saved_success">Saved Success</string>
     <string name="saved_failed">Saved Failed</string>
+
+    <string name="permission_write">下载图片等功能需要获取系统权限，否则将上传失败</string>
+    <string name="permission_location">获取位置信息需要获取系统权限</string>
 </resources>

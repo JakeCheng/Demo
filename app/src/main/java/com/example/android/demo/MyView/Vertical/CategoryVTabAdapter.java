@@ -37,9 +37,9 @@ public class CategoryVTabAdapter implements TabAdapter {
         return new CategoryTabView.TabIcon.Builder()
                 .setIconGravity(Gravity.RIGHT)
                 .setIcon(R.mipmap.category_arrow, 0)
-                .setIconSize(mContext.getResources().getDimensionPixelOffset(R.dimen.view_dimen_5),
-                        mContext.getResources().getDimensionPixelOffset(R.dimen.view_dimen_7))
-                .setIconMargin(mContext.getResources().getDimensionPixelOffset(R.dimen.view_dimen_7))
+                .setIconSize(mContext.getResources().getDimensionPixelOffset(R.dimen.dp_5),
+                        mContext.getResources().getDimensionPixelOffset(R.dimen.dp_7))
+                .setIconMargin(mContext.getResources().getDimensionPixelOffset(R.dimen.dp_7))
                 .build();
     }
 

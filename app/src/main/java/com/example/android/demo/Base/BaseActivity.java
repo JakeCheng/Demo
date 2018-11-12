@@ -1,51 +1,37 @@
 package com.example.android.demo.Base;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.android.demo.BuildConfig;
+import com.example.android.demo.Model.BaseModel;
 import com.example.android.demo.MyApplication;
+import com.example.android.demo.R;
 import com.example.android.demo.Service.NetWorkChangeEvent;
 import com.example.android.demo.Utils.MyAppManager;
 import com.example.android.demo.Utils.NetWorkManager;
+import com.example.android.demo.Utils.ProgressDialog;
+import com.example.android.demo.Utils.ScreenUtils;
+import com.example.android.demo.Utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
-import pub.devrel.easypermissions.EasyPermissions;
 
-public abstract class BaseActivity <T extends BasePresenter> extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatActivity implements IBaseView {
     protected T mPresenter;
     protected BaseActivity mContext;
     protected MyApplication application;
     protected String TAG;
+    protected Dialog dialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        //严格模式  优化改善代码
-        if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                    .detectCustomSlowCalls()
-                    .detectDiskReads()
-                    .detectDiskWrites()
-                    .detectNetwork() // or .detectAll() for all detectable problems
-                    .penaltyLog().build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                    .detectLeakedRegistrationObjects()
-                    .detectActivityLeaks()
-                    .detectFileUriExposure()
-                    .detectLeakedSqlLiteObjects()
-                    .detectLeakedClosableObjects()
-                    .penaltyLog()
-                    .build());
-        }
         super.onCreate( savedInstanceState);
         mContext = this;
         if (!EventBus.getDefault().isRegistered(this)){
@@ -122,4 +108,38 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
                 break;
         }
     }
+    private void showLoadingDialog() {
+        if (dialog == null) {
+            dialog = ProgressDialog.createLoadingDialog(mContext,getResources().getString(R.string.loading));
+        }
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+    private void closeLoadingDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+    @Override
+    public void showLoading() {
+        showLoadingDialog();
+    }
+
+
+    @Override
+    public void hideLoading() {
+        closeLoadingDialog();
+    }
+
+
+    @Override
+    public void showError(String msg) {
+        ToastUtils.showPhone(mContext,msg,2);
+    }
+
+    @Override
+    public void onErrorCode(BaseModel model) {
+        ToastUtils.showPhone(mContext, ScreenUtils.showErrMovie(model.getError_code()),2);
+    }
+
 }

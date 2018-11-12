@@ -107,26 +107,33 @@ public class ACache {
 	 * @param value
 	 *            保存的String数据
 	 */
-	public void put(String key, String value) {
-		File file = mCache.newFile(key);
-		Logger.error("info", "put: "+file.getPath());
-		BufferedWriter out = null;
-		try {
-			out = new BufferedWriter(new FileWriter(file), 1024);
-			out.write(value);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (out != null) {
+	public void put(final String key, final String value) {
+		new Thread(){
+			@Override
+			public void run() {
+				super.run();
+				File file = mCache.newFile(key);
+				Logger.error("info", "put: "+file.getPath());
+				BufferedWriter out = null;
 				try {
-					out.flush();
-					out.close();
+					out = new BufferedWriter(new FileWriter(file), 1024);
+					out.write(value);
 				} catch (IOException e) {
 					e.printStackTrace();
+				} finally {
+					if (out != null) {
+						try {
+							out.flush();
+							out.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					mCache.put(file);
 				}
 			}
-			mCache.put(file);
-		}
+		}.start();
+
 	}
 
 	/**
@@ -657,7 +664,6 @@ public class ACache {
 			Long currentTime = System.currentTimeMillis();
 			file.setLastModified(currentTime);
 			lastUsageDates.put(file, currentTime);
-
 			return file;
 		}
 

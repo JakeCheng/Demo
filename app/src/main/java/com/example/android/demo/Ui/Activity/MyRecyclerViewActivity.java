@@ -147,13 +147,4 @@ public class MyRecyclerViewActivity extends BaseActivity {
                 break;
         }
     }
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onCompleted() {
-
-    }
 }

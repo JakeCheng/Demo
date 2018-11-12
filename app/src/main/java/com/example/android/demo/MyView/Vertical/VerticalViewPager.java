@@ -49,7 +49,7 @@ import java.util.Comparator;
 /**
  * copy from https://github.com/soulrelay/VerticalViewPagerWithTabLayout
  * 与VerticalTabLayout结合使用
- * Just a copy of the original ViewPager modified to support vertical Scrolling
+ * 可以滑动更换VerticalTabLayout选项
  */
 public class VerticalViewPager extends ViewGroup {
     private static final String TAG = "VerticalViewPager";

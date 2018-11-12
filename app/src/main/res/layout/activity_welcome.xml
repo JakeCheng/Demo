@@ -9,16 +9,15 @@
             android:layout_centerInParent="true">
             <ImageView
                 android:id="@+id/iv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:visibility="invisible"
                 android:layout_gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher_round"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:paddingTop="@dimen/dp_20"
                 android:text="简单测试Demo"/>
         </LinearLayout>
-
 </RelativeLayout>

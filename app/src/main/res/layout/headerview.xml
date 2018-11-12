@@ -6,9 +6,9 @@
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/dp_100"
         android:background="#AAF7F7"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="@dimen/sp_25"
         android:gravity="center"/>
 </RelativeLayout>

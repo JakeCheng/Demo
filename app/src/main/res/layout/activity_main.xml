@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/BackGroundColor"
     android:orientation="vertical">
-    <android.support.v4.view.ViewPager
+    <com.example.android.demo.MyView.CustomViewPager
         android:id="@+id/mViewPager"
         android:layout_width="match_parent"
         android:layout_weight="1"
@@ -13,12 +13,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dp_1"
         android:background="@color/text_color_black_20"/>
     <com.example.android.demo.MyView.ViewPageTabBar
         android:id="@+id/tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/view_dimen_48"
+        android:layout_height="@dimen/dp_48"
         android:background="@android:color/white"
         android:gravity="center_vertical" />
 </LinearLayout>

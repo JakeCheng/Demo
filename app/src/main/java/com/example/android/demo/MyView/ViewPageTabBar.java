@@ -130,10 +130,10 @@ public class ViewPageTabBar extends LinearLayout implements View.OnClickListener
            mTextView.setDuplicateParentStateEnabled(true);
            mTextView.setGravity(Gravity.CENTER);
            mTextView.setTextColor(getResources().getColorStateList(R.color.normal_black40_selected_14b9c7_color));
-           mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.activity_tab_bar_bottom_size));
+           mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.sp_12));
            LayoutParams flp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
            flp.gravity = Gravity.CENTER;
-           mTextView.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.main_padding_3));
+           mTextView.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.dp_3));
            this.addView(mTextView,flp);
        }
 

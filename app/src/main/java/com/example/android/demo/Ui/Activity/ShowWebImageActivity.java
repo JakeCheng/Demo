@@ -191,16 +191,6 @@ public class ShowWebImageActivity extends BaseActivity implements EasyPermission
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
-	@Override
-	public void onError(Throwable e) {
-
-	}
-
-	@Override
-	public void onCompleted() {
-
-	}
 	@AfterPermissionGranted(WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
 	public void getPermission() {
 		if (EasyPermissions.hasPermissions(this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -249,7 +239,7 @@ public class ShowWebImageActivity extends BaseActivity implements EasyPermission
 	@Override
 	public void onPermissionsDenied(int requestCode, List<String> perms) {
 		if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-			ScreenUtils.showPermission(mContext,1);
+			ScreenUtils.showPermission(mContext,getResources().getString(R.string.permission_write));
 		}
 	}
 }
