@@ -30,6 +30,9 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
     protected MyApplication application;
     protected String TAG;
     protected Dialog dialog;
+
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState);
