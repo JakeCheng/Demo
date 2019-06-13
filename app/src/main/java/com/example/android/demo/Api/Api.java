@@ -10,13 +10,14 @@ import com.example.android.demo.Utils.Constants;
 public class Api {
 
     private static ApiService apiService;
-
+    private static String mUrl = "";
     private Api(){
         throw new AssertionError();
     }
 
     private static ApiService getApiService(String url){
-        if(apiService == null){
+        if(apiService == null || !mUrl.equals(url)){
+            mUrl = url;
             apiService = new ApiHttp(url).getRetrofit().create(ApiService.class);
         }
         return apiService;

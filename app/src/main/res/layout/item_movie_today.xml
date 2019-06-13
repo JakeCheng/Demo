@@ -12,16 +12,17 @@
         <ImageView
             android:id="@+id/iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:src="@mipmap/image1"/>
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingBottom="10dp"
             style="@style/Black14"
             android:singleLine="true"
             android:layout_gravity="center_horizontal"/>
